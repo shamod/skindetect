@@ -21,7 +21,19 @@ class LoginPageFormState extends State<LoginPage> {
           children: <Widget>[
             TextFormField(
               decoration: InputDecoration(
-                  labelText: 'Enter your username'
+                  labelText: 'Email'
+              ),
+              validator: (value) {
+                if (value.isEmpty) {
+                  return 'Please enter some text';
+                }
+                return null;
+              },
+            ),
+            TextFormField(
+              obscureText: true,
+              decoration: InputDecoration(
+                  labelText: 'Password'
               ),
               validator: (value) {
                 if (value.isEmpty) {

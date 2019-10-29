@@ -27,7 +27,7 @@ class HomePage extends StatelessWidget {
     child: Padding(
       padding: EdgeInsets.only(top: 25.0),
       child: Text(
-        'Skin Cure',
+        'Skin Detect',
         textDirection: TextDirection.ltr,
         style: TextStyle(
           fontSize: 32,
