@@ -11,7 +11,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Skin Cure',
+      title: 'Skin Detect',
       initialRoute: '/',
       routes: {
         '/': (context) => HomePage(),

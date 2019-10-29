@@ -39,7 +39,7 @@ class RegisterPage extends StatelessWidget {
               TextFormField(
                 obscureText: true,
                 decoration: InputDecoration(
-                    labelText: 'Enter your password'
+                    labelText: 'Password'
                 ),
                 validator: (value) {
                   if (value.isEmpty) {
