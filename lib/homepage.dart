@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'components/skin_detect_app_bar.dart';
+import 'components/home_carousel.dart';
 
 class HomePage extends StatelessWidget {
   final String title;
@@ -12,11 +13,10 @@ class HomePage extends StatelessWidget {
         appBar: SkinDetectAppBar(),
         body: Column(
           children: <Widget>[
-            Expanded(
-              child: Container(
-                color: Colors.black,
-              ),
-            ),
+            Expanded(child: LayoutBuilder(
+                builder: (BuildContext _, BoxConstraints constraints) {
+              return CarouselWithIndicator(height: constraints.maxHeight - 32);
+            })),
             Container(
               color: Colors.white,
               child: Padding(
