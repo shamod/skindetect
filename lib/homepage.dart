@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'components/skin_detect_app_bar.dart';
 
 class HomePage extends StatelessWidget {
   final String title;
@@ -8,61 +9,54 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: Column(children: <Widget>[
-          mainContainer,
-          loginContainer(context),
-          registerContainer(context),
-          diagnoseContainer(context),
-        ]),
-      ),
-    );
-  }
-
-  final mainContainer = Container(
-    child: Padding(
-      padding: EdgeInsets.only(top: 25.0),
-      child: Text(
-        'Skin Detect',
-        textDirection: TextDirection.ltr,
-        style: TextStyle(
-          fontSize: 32,
-          color: Colors.black87,
-        ),
-      ),
-    ),
-  );
-
-  Container loginContainer(BuildContext context) {
-    return Container(
-      child: RaisedButton(
-        child: Text('Login'),
-        onPressed: () {
-          Navigator.pushNamed(context, '/login');
-        },
-      ),
-    );
-  }
-
-  Container registerContainer(BuildContext context) {
-    return Container(
-      child: RaisedButton(
-        child: Text('Register'),
-        onPressed: () {
-          Navigator.pushNamed(context, '/register');
-        },
-      ),
-    );
-  }
-
-  Container diagnoseContainer(BuildContext context) {
-    return Container(
-      child: RaisedButton(
-        child: Text('Diagnose'),
-        onPressed: () {
-          Navigator.pushNamed(context, '/diagnose');
-        },
-      ),
-    );
+        appBar: SkinDetectAppBar(),
+        body: Column(
+          children: <Widget>[
+            Expanded(
+              child: Container(
+                color: Colors.black,
+              ),
+            ),
+            Container(
+              color: Colors.white,
+              child: Padding(
+                padding: EdgeInsets.all(16),
+                child: Column(
+                  children: <Widget>[
+                    Row(
+                      children: <Widget>[
+                        Expanded(
+                          child: FlatButton(
+                            color: Theme.of(context).primaryColor,
+                            padding: EdgeInsets.all(16),
+                            textColor: Colors.white,
+                            child: Text("I already have an account."),
+                            onPressed: () =>
+                                Navigator.pushNamed(context, '/login'),
+                          ),
+                        )
+                      ],
+                    ),
+                    Padding(
+                        padding: EdgeInsets.only(top: 16),
+                        child: Row(
+                          children: <Widget>[
+                            Expanded(
+                              child: FlatButton(
+                                color: Color.fromARGB(255, 240, 240, 242),
+                                padding: EdgeInsets.all(16),
+                                child: Text("I'm a new Skin Detect user."),
+                                onPressed: () =>
+                                    Navigator.pushNamed(context, '/register'),
+                              ),
+                            )
+                          ],
+                        ))
+                  ],
+                ),
+              ),
+            )
+          ],
+        ));
   }
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'components/skin_detect_app_bar.dart';
 
 class RegisterPage extends StatelessWidget {
   TextStyle style = TextStyle(fontFamily: 'Montserrat', fontSize: 20.0);
@@ -7,9 +8,7 @@ class RegisterPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Register'),
-      ),
+      appBar: SkinDetectAppBar(),
       body: Form(
         key: _formKey,
         child: Column(

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'components/skin_detect_app_bar.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -12,9 +13,7 @@ class LoginPageFormState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Login'),
-      ),
+      appBar: SkinDetectAppBar(),
       body: Form(
         key: _formKey,
         child: Column(
@@ -36,8 +35,7 @@ class LoginPageFormState extends State<LoginPage> {
         labelText: 'Email',
         contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
         hintText: "Email",
-        border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(32.0)),
+        border: OutlineInputBorder(borderRadius: BorderRadius.circular(32.0)),
       ),
       validator: (value) {
         if (value.isEmpty) {
@@ -56,8 +54,7 @@ class LoginPageFormState extends State<LoginPage> {
         labelText: 'Password',
         contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
         hintText: "Password",
-        border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(32.0)),
+        border: OutlineInputBorder(borderRadius: BorderRadius.circular(32.0)),
       ),
       validator: (value) {
         if (value.isEmpty) {
@@ -94,4 +91,3 @@ class LoginPageFormState extends State<LoginPage> {
     );
   }
 }
-

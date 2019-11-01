@@ -11,14 +11,16 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Skin Detect',
-      initialRoute: '/',
-      routes: {
-        '/': (context) => HomePage(),
-        '/login': (context) => LoginPage(),
-        '/register': (context) => RegisterPage(),
-        '/diagnose': (context) => DiagnosePage(),
-      },
-    );
+        title: 'Skin Detect',
+        initialRoute: '/',
+        routes: {
+          '/': (context) => HomePage(),
+          '/login': (context) => LoginPage(),
+          '/register': (context) => RegisterPage(),
+          '/diagnose': (context) => DiagnosePage(),
+        },
+        theme: ThemeData(
+          primaryColor: Color.fromARGB(255, 255, 0, 59),
+        ));
   }
 }
