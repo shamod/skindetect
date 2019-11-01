@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class SkinDetectAppBar extends StatelessWidget with PreferredSizeWidget {
+  final double _height = 120.0;
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -13,7 +15,7 @@ class SkinDetectAppBar extends StatelessWidget with PreferredSizeWidget {
               Color.fromARGB(255, 235, 131, 100),
               Color.fromARGB(255, 216, 0, 170)
             ])),
-        height: 104.0,
+        height: _height - 32,
         child: Stack(
           children: <Widget>[
             Navigator.canPop(context)
@@ -31,7 +33,7 @@ class SkinDetectAppBar extends StatelessWidget with PreferredSizeWidget {
             Center(
               child: SvgPicture.asset('assets/images/logo.svg',
                   color: Colors.white,
-                  height: 72,
+                  height: _height / 2,
                   semanticsLabel: 'SkinDetect Logo'),
             ),
           ],
@@ -39,5 +41,5 @@ class SkinDetectAppBar extends StatelessWidget with PreferredSizeWidget {
   }
 
   @override
-  Size get preferredSize => Size.fromHeight(140.0);
+  Size get preferredSize => Size.fromHeight(_height);
 }
