@@ -1,8 +1,6 @@
-
 import 'package:flutter/material.dart';
 
 class HomePage extends StatelessWidget {
-
   final String title;
 
   HomePage({this.title}) : super();
@@ -11,19 +9,17 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: Column(
-            children: <Widget>[
-              mainContainer,
-              loginContainer(context),
-              registerContainer(context),
-              diagnoseContainer(context),
-            ]
-        ),
+        child: Column(children: <Widget>[
+          mainContainer,
+          loginContainer(context),
+          registerContainer(context),
+          diagnoseContainer(context),
+        ]),
       ),
     );
   }
 
-  var mainContainer = Container(
+  final mainContainer = Container(
     child: Padding(
       padding: EdgeInsets.only(top: 25.0),
       child: Text(
