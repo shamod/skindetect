@@ -48,7 +48,7 @@ class HomePage extends StatelessWidget {
                     children: <Widget>[
                       Expanded(
                           child: CarouselWithIndicator(
-                              height: constraint.maxHeight - 152)),
+                              height: constraint.maxHeight - 180)),
                       Container(
                         color: Colors.white,
                         child: Padding(
