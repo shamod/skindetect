@@ -1,6 +1,6 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-import 'package:skindetect/authentication/user_model.dart';
+import 'package:skindetect/authentication/user.model.dart';
 
 class AuthenticationService {
 

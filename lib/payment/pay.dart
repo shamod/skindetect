@@ -1,53 +1,48 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
-import 'package:skindetect/authentication/auth.service.dart';
-import 'package:skindetect/authentication/user.model.dart';
+import 'package:skindetect/payment/pay.model.dart';
+
 import '../components/skin_detect_app_bar.dart';
 
+class PayPage extends StatefulWidget {
 
-class RegisterPage extends StatefulWidget {
-
-  @override
-  _RegisterPageState createState() =>  _RegisterPageState();
-
+  _PayPageState createState() => _PayPageState();
 }
 
-class _RegisterPageState extends State<RegisterPage> {
-final   TextStyle style = TextStyle(fontFamily: 'Montserrat', fontSize: 20.0);
-
+class _PayPageState extends State<PayPage> {
+  final TextStyle style = TextStyle(fontFamily: 'Montserrat', fontSize: 20.0);
   static GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  final _user = User();
+  static var _pay = Pay();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: SkinDetectAppBar(),
-      body: SingleChildScrollView(
-            scrollDirection: Axis.vertical,
-            child: Form(
-              key: _formKey,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  _nameField(),
-                  _emailField(),
-                  _passwordField(),
-                  _registerButton(context),
-                ],
-              ),
-            ),
+        appBar: SkinDetectAppBar(),
+    body: SingleChildScrollView(
+      scrollDirection: Axis.vertical,
+      child: Form(
+        key: _formKey,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            _creditCardNumberField(),
+            _expirationDateField(),
+            _CVCField(),
+            _payButton(context),
+          ],
+        ),
       ),
+    ),
     );
   }
-  _nameField() {
+
+  _creditCardNumberField() {
     return Padding(
       padding: const EdgeInsets.all(16.0),
       child: TextFormField(
         decoration: InputDecoration(
-          labelText: 'Name',
+          labelText: 'Credit Card Number',
           contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
-          hintText: "Name",
+          hintText: "Credit Card Number",
           border: OutlineInputBorder(borderRadius: BorderRadius.circular(32.0)),
         ),
         validator: (value) {
@@ -56,19 +51,19 @@ final   TextStyle style = TextStyle(fontFamily: 'Montserrat', fontSize: 20.0);
           }
           return null;
         },
-        onChanged: (val) => setState(() => _user.name = val),
+        onChanged: (val) => setState(() => _pay.creditCardNumber = val),
       ),
     );
   }
 
-  _emailField() {
+  _expirationDateField() {
     return Padding(
       padding: const EdgeInsets.all(16.0),
       child: TextFormField(
         decoration: InputDecoration(
-          labelText: 'Email',
+          labelText: 'Expiration Date',
           contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
-          hintText: "Email",
+          hintText: "Expiration Date",
           border: OutlineInputBorder(borderRadius: BorderRadius.circular(32.0)),
         ),
         validator: (value) {
@@ -77,20 +72,19 @@ final   TextStyle style = TextStyle(fontFamily: 'Montserrat', fontSize: 20.0);
           }
           return null;
         },
-        onChanged: (val) => setState(() => _user.email = val),
+        onChanged: (val) => setState(() => _pay.expirationDate = val),
       ),
     );
   }
 
-  _passwordField() {
+  _CVCField() {
     return Padding(
       padding: const EdgeInsets.all(16.0),
       child: TextFormField(
-        obscureText: true,
         decoration: InputDecoration(
-          labelText: 'Password',
+          labelText: 'CVC',
           contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
-          hintText: "Password",
+          hintText: "CVC",
           border: OutlineInputBorder(borderRadius: BorderRadius.circular(32.0)),
         ),
         validator: (value) {
@@ -99,11 +93,12 @@ final   TextStyle style = TextStyle(fontFamily: 'Montserrat', fontSize: 20.0);
           }
           return null;
         },
-        onChanged: (val) => setState(() => _user.password = val),
+        onChanged: (val) => setState(() => _pay.CVC = val),
       ),
     );
   }
-  _registerButton(BuildContext context) {
+
+  _payButton(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(16.0),
       child: Material(
@@ -115,10 +110,10 @@ final   TextStyle style = TextStyle(fontFamily: 'Montserrat', fontSize: 20.0);
           padding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
           onPressed: () {
             if(_formKey.currentState.validate()) {
-              AuthenticationService.saveRegistrationDataToAPI(_user);
+
             }
           },
-          child: Text("Register",
+          child: Text("Submit Payment",
               textAlign: TextAlign.center,
               style: style.copyWith(
                   color: Colors.white, fontWeight: FontWeight.bold)),
@@ -126,6 +121,4 @@ final   TextStyle style = TextStyle(fontFamily: 'Montserrat', fontSize: 20.0);
       ),
     );
   }
-
-
 }

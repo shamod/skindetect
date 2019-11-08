@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:skindetect/authentication/auth.service.dart';
-import 'package:skindetect/authentication/user_model.dart';
+import 'package:skindetect/authentication/user.model.dart';
 import '../components/skin_detect_app_bar.dart';
 
 class LoginPage extends StatefulWidget {

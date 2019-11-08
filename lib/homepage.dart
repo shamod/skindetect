@@ -30,7 +30,7 @@ class HomePage extends StatelessWidget {
             color: Color.fromARGB(255, 240, 240, 242),
             padding: EdgeInsets.all(16),
             child: Text("I'm a new Skin Detect user."),
-            onPressed: () => Navigator.pushNamed(context, '/register'),
+            onPressed: () => Navigator.pushNamed(context, '/diagnose'),
           ),
         )
       ],
