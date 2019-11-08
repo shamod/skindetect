@@ -30,11 +30,11 @@ class _ImageProcessorState extends State<ImageProcessor> {
       this._imageFile = widget._imageFile;
     });
 
-    _loadModel().then((val) {
-      setState(() {
-        _busy = false;
-      });
-    });
+//    _loadModel().then((val) {
+//      setState(() {
+//        _busy = false;
+//      });
+//    });
   }
 
   @override
@@ -63,7 +63,7 @@ class _ImageProcessorState extends State<ImageProcessor> {
             MaterialButton(
               minWidth: MediaQuery.of(context).size.width,
               padding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
-              onPressed: _predictImage,
+              onPressed: () {},
               child: Text(
                 "Diagnose",
                 textAlign: TextAlign.center,
