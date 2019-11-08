@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:skindetect/diagnose.dart';
 import 'package:skindetect/homepage.dart';
-import 'package:skindetect/login.dart';
-import 'package:skindetect/register.dart';
+import 'package:skindetect/authentication/login.dart';
+import 'package:skindetect/authentication/register.dart';
 
 void main() => runApp(MyApp());
 

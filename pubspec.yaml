@@ -26,6 +26,7 @@ flutter:
     - assets/images/logo.svg
     - assets/model/model.tflite
     - assets/model/labels.txt
+    - assets/model/skinmodel.tflite
   fonts:
     - family: Montserrat
       fonts:

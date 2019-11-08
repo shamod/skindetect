@@ -81,8 +81,7 @@ class _ImageProcessorState extends State<ImageProcessor> {
 
     try {
       String res = await Tflite.loadModel(
-                            model: "assets/model/model.tflite",
-                            labels: "assets/model/labels.txt"
+                            model: "assets/model/skinmodel.tflite",
                           );
       print(res);
     } on PlatformException catch(e) {
