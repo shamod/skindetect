@@ -13,7 +13,6 @@ dependencies:
   flutter_svg: ^0.14.3
   http: ^0.12.0
   image_picker: ^0.6.1
-  tflite: ^1.0.4
 
 dev_dependencies:
   flutter_launcher_icons: "^0.7.3"
@@ -24,9 +23,9 @@ flutter:
   uses-material-design: true
   assets:
     - assets/images/logo.svg
-    - assets/model/model.tflite
-    - assets/model/labels.txt
-    - assets/model/skinmodel.tflite
+    - assets/images/slide_01.jpg
+    - assets/images/slide_02.jpg
+    - assets/images/slide_03.jpg
   fonts:
     - family: Montserrat
       fonts:
