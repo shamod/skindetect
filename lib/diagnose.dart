@@ -9,7 +9,6 @@ import 'package:skindetect/payment/pay.dart';
 
 class DiagnosePage extends StatelessWidget {
   final TextStyle style = TextStyle(fontFamily: 'Montserrat', fontSize: 20.0);
-  File file;
 
   @override
   Widget build(BuildContext context) {
