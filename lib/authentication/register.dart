@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:skindetect/authentication/auth.service.dart';
 import 'package:skindetect/authentication/user.model.dart';
@@ -117,7 +116,7 @@ class _RegisterPageState extends State<RegisterPage> {
               AuthenticationService.endpointPost('register', _user).then((res) {
                 try {
                   Map resObj = json.decode(res.body);
-                  if (resObj['type'] == 'success') {
+                  if (resObj['status']['type'] == 'success') {
                     Navigator.pushNamed(context, '/login');
                   }
                 } catch (err) {

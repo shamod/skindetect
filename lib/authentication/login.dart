@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:skindetect/authentication/auth.service.dart';
 import 'package:skindetect/authentication/user.model.dart';
@@ -92,7 +93,16 @@ class LoginPageFormState extends State<LoginPage> {
           padding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
           onPressed: () {
             if (_formKey.currentState.validate()) {
-              AuthenticationService.endpointPost('login', _user);
+              AuthenticationService.endpointPost('login', _user).then((res) {
+                try {
+                  Map resObj = json.decode(res.body);
+                  if (resObj['status']['type'] == 'success') {
+                    Navigator.pushNamed(context, '/diagnose');
+                  }
+                } catch (err) {
+                  print(err);
+                }
+              });
             }
           },
           child: Text("Login",
