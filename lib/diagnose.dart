@@ -1,11 +1,11 @@
-import 'dart:convert';
 import 'dart:io';
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
 import 'package:image_picker/image_picker.dart';
 import 'package:skindetect/image_processor.dart';
 import 'package:skindetect/payment/pay.dart';
-import 'package:skindetect/payment/pay.model.dart';
+// import 'dart:convert';
+// import 'package:http/http.dart' as http;
+// import 'package:skindetect/payment/pay.model.dart';
 
 class DiagnosePage extends StatelessWidget {
   final TextStyle style = TextStyle(fontFamily: 'Montserrat', fontSize: 20.0);
@@ -51,9 +51,7 @@ class DiagnosePage extends StatelessWidget {
           padding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
           onPressed: () {
             Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => PayPage()));
+                context, MaterialPageRoute(builder: (context) => PayPage()));
           },
           child: Text("Make Payment",
               textAlign: TextAlign.center,
