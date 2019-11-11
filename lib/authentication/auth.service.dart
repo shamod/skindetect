@@ -3,36 +3,21 @@ import 'package:http/http.dart' as http;
 import 'package:skindetect/authentication/user.model.dart';
 
 class AuthenticationService {
+  static const String url = 'http://192.168.0.140:5000';
+  static const Map headers = {
+    "Content-type": "application/json",
+    "Accept": "application/json"
+  };
 
-  static Future<http.Response> saveRegistrationDataToAPI(User body) async {
-    var response ;
-    var connected = true ;
-    try{
-      var url = 'http://10.0.0.198:5000/register';
-      response = await http.post(url, body: json.encode(body.toJson()), headers: {"Content-type": "application/json", "Accept": "application/json"});
-      print('Response status: ${response.statusCode}');
-      print('Response body: ${response.body}');
-      return response;
-    }
-    catch(e){
-      connected = false ;
+  static Future<http.Response> endpointPost(String endpoint, User user) async {
+    Future<http.Response> res;
+    String body = json.encode(user.toJson());
+    try {
+      res = http.post("$url/$endpoint", headers: headers, body: body);
+    } catch (err) {
+      print(err);
     }
 
+    return res;
   }
-
-  static Future<http.Response> verifyLogin(User body) async {
-    var response ;
-    var connected = true ;
-    try{
-      var url = 'http://10.0.0.198:5000/login';
-      response = await http.post(url, body: json.encode(body.toJson()), headers: {"Content-type": "application/json", "Accept": "application/json"});
-      print('Response status: ${response.statusCode}');
-      print('Response body: ${response.body}');
-      return response;
-    }
-    catch(e){
-      connected = false ;
-    }
-  }
-
 }

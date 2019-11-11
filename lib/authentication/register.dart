@@ -5,16 +5,13 @@ import 'package:skindetect/authentication/auth.service.dart';
 import 'package:skindetect/authentication/user.model.dart';
 import '../components/skin_detect_app_bar.dart';
 
-
 class RegisterPage extends StatefulWidget {
-
   @override
-  _RegisterPageState createState() =>  _RegisterPageState();
-
+  _RegisterPageState createState() => _RegisterPageState();
 }
 
 class _RegisterPageState extends State<RegisterPage> {
-final   TextStyle style = TextStyle(fontFamily: 'Montserrat', fontSize: 20.0);
+  final TextStyle style = TextStyle(fontFamily: 'Montserrat', fontSize: 20.0);
 
   static GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final _user = User();
@@ -24,22 +21,23 @@ final   TextStyle style = TextStyle(fontFamily: 'Montserrat', fontSize: 20.0);
     return Scaffold(
       appBar: SkinDetectAppBar(),
       body: SingleChildScrollView(
-            scrollDirection: Axis.vertical,
-            child: Form(
-              key: _formKey,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  _nameField(),
-                  _emailField(),
-                  _passwordField(),
-                  _registerButton(context),
-                ],
-              ),
-            ),
+        scrollDirection: Axis.vertical,
+        child: Form(
+          key: _formKey,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              _nameField(),
+              _emailField(),
+              _passwordField(),
+              _registerButton(context),
+            ],
+          ),
+        ),
       ),
     );
   }
+
   _nameField() {
     return Padding(
       padding: const EdgeInsets.all(16.0),
@@ -103,6 +101,7 @@ final   TextStyle style = TextStyle(fontFamily: 'Montserrat', fontSize: 20.0);
       ),
     );
   }
+
   _registerButton(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(16.0),
@@ -114,8 +113,17 @@ final   TextStyle style = TextStyle(fontFamily: 'Montserrat', fontSize: 20.0);
           minWidth: MediaQuery.of(context).size.width,
           padding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
           onPressed: () {
-            if(_formKey.currentState.validate()) {
-              AuthenticationService.saveRegistrationDataToAPI(_user);
+            if (_formKey.currentState.validate()) {
+              AuthenticationService.endpointPost('register', _user).then((res) {
+                try {
+                  Map resObj = json.decode(res.body);
+                  if (resObj['type'] == 'success') {
+                    Navigator.pushNamed(context, '/login');
+                  }
+                } catch (err) {
+                  print(err);
+                }
+              });
             }
           },
           child: Text("Register",
@@ -126,6 +134,4 @@ final   TextStyle style = TextStyle(fontFamily: 'Montserrat', fontSize: 20.0);
       ),
     );
   }
-
-
 }

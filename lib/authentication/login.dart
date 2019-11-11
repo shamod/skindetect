@@ -59,25 +59,25 @@ class LoginPageFormState extends State<LoginPage> {
   }
 
   _passwordField() {
-     return Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: TextFormField(
-          obscureText: true,
-          decoration: InputDecoration(
-            labelText: 'Password',
-            contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
-            hintText: "Password",
-            border: OutlineInputBorder(borderRadius: BorderRadius.circular(32.0)),
-          ),
-          validator: (value) {
-            if (value.isEmpty) {
-              return 'Please enter some text';
-            }
-            return null;
-          },
-          onChanged: (val) => setState(() => _user.password = val),
+    return Padding(
+      padding: const EdgeInsets.all(16.0),
+      child: TextFormField(
+        obscureText: true,
+        decoration: InputDecoration(
+          labelText: 'Password',
+          contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
+          hintText: "Password",
+          border: OutlineInputBorder(borderRadius: BorderRadius.circular(32.0)),
         ),
-      );
+        validator: (value) {
+          if (value.isEmpty) {
+            return 'Please enter some text';
+          }
+          return null;
+        },
+        onChanged: (val) => setState(() => _user.password = val),
+      ),
+    );
   }
 
   _loginButton(BuildContext context) {
@@ -92,7 +92,7 @@ class LoginPageFormState extends State<LoginPage> {
           padding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
           onPressed: () {
             if (_formKey.currentState.validate()) {
-              AuthenticationService.verifyLogin(_user);
+              AuthenticationService.endpointPost('login', _user);
             }
           },
           child: Text("Login",
