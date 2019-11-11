@@ -4,7 +4,6 @@ import 'package:skindetect/payment/pay.model.dart';
 import '../components/skin_detect_app_bar.dart';
 
 class PayPage extends StatefulWidget {
-
   _PayPageState createState() => _PayPageState();
 }
 
@@ -16,22 +15,22 @@ class _PayPageState extends State<PayPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: SkinDetectAppBar(),
-    body: SingleChildScrollView(
-      scrollDirection: Axis.vertical,
-      child: Form(
-        key: _formKey,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            _creditCardNumberField(),
-            _expirationDateField(),
-            _CVCField(),
-            _payButton(context),
-          ],
+      appBar: SkinDetectAppBar(),
+      body: SingleChildScrollView(
+        scrollDirection: Axis.vertical,
+        child: Form(
+          key: _formKey,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              _creditCardNumberField(),
+              _expirationDateField(),
+              _cardVerificationCodeField(),
+              _payButton(context),
+            ],
+          ),
         ),
       ),
-    ),
     );
   }
 
@@ -77,7 +76,7 @@ class _PayPageState extends State<PayPage> {
     );
   }
 
-  _CVCField() {
+  _cardVerificationCodeField() {
     return Padding(
       padding: const EdgeInsets.all(16.0),
       child: TextFormField(
@@ -93,7 +92,7 @@ class _PayPageState extends State<PayPage> {
           }
           return null;
         },
-        onChanged: (val) => setState(() => _pay.CVC = val),
+        onChanged: (val) => setState(() => _pay.cardVerificationCode = val),
       ),
     );
   }
@@ -109,9 +108,7 @@ class _PayPageState extends State<PayPage> {
           minWidth: MediaQuery.of(context).size.width,
           padding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
           onPressed: () {
-            if(_formKey.currentState.validate()) {
-
-            }
+            if (_formKey.currentState.validate()) {}
           },
           child: Text("Submit Payment",
               textAlign: TextAlign.center,
