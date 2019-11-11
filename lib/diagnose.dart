@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:skindetect/image_processor.dart';
 import 'package:skindetect/payment/pay.dart';
+import 'components/skin_detect_app_bar.dart';
 // import 'dart:convert';
 // import 'package:http/http.dart' as http;
 // import 'package:skindetect/payment/pay.model.dart';
@@ -13,9 +14,7 @@ class DiagnosePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Diagnose'),
-      ),
+      appBar: SkinDetectAppBar(hasHistoryBackButton: false),
       body: SingleChildScrollView(
         scrollDirection: Axis.vertical,
         child: _buyCreditButton(context),
