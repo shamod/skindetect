@@ -170,7 +170,7 @@ class RegisterPageFormState extends State<RegisterPage> {
                                 textColor: Colors.white,
                                 child: Padding(
                                   padding: EdgeInsets.all(16),
-                                  child: Text("Sign in"),
+                                  child: Text("Create account"),
                                 ),
                                 borderSide: BorderSide(
                                   color: Colors.white,
