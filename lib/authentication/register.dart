@@ -86,6 +86,8 @@ class RegisterPageFormState extends State<RegisterPage> {
                                                       border: InputBorder.none,
                                                       labelText: 'Name',
                                                       hintText: 'Name',
+                                                      hintStyle: TextStyle(
+                                                          color: Colors.white),
                                                       labelStyle: TextStyle(
                                                           color: Colors.white),
                                                       filled: true,
@@ -117,6 +119,8 @@ class RegisterPageFormState extends State<RegisterPage> {
                                                       border: InputBorder.none,
                                                       labelText: 'Email',
                                                       hintText: 'Email',
+                                                      hintStyle: TextStyle(
+                                                          color: Colors.white),,
                                                       labelStyle: TextStyle(
                                                           color: Colors.white),
                                                       filled: true,
@@ -149,6 +153,8 @@ class RegisterPageFormState extends State<RegisterPage> {
                                                       border: InputBorder.none,
                                                       labelText: 'Password',
                                                       hintText: 'Password',
+                                                      hintStyle: TextStyle(
+                                                          color: Colors.white),
                                                       labelStyle: TextStyle(
                                                           color: Colors.white),
                                                       filled: true,

@@ -85,6 +85,8 @@ class LoginPageFormState extends State<LoginPage> {
                                                       border: InputBorder.none,
                                                       labelText: 'Email',
                                                       hintText: 'Email',
+                                                      hintStyle: TextStyle(
+                                                          color: Colors.white),
                                                       labelStyle: TextStyle(
                                                           color: Colors.white),
                                                       filled: true,
@@ -117,6 +119,8 @@ class LoginPageFormState extends State<LoginPage> {
                                                       border: InputBorder.none,
                                                       labelText: 'Password',
                                                       hintText: 'Password',
+                                                      hintStyle: TextStyle(
+                                                          color: Colors.white),
                                                       labelStyle: TextStyle(
                                                           color: Colors.white),
                                                       filled: true,
