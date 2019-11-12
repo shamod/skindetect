@@ -191,11 +191,12 @@ class RegisterPageFormState extends State<RegisterPage> {
                                                 .validate()) {
                                               AuthenticationService
                                                       .endpointPost(
-                                                          'login', _user)
+                                                          'register', _user)
                                                   .then((res) {
                                                 try {
                                                   Map resObj =
                                                       json.decode(res.body);
+                                                  print(resObj);
                                                   if (resObj['status']
                                                           ['type'] ==
                                                       'success') {
