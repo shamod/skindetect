@@ -3,6 +3,9 @@ import 'package:flutter_svg/flutter_svg.dart';
 
 class SkinDetectAppBar extends StatelessWidget with PreferredSizeWidget {
   final double _height = 120.0;
+  final bool hasHistoryBackButton;
+
+  SkinDetectAppBar({this.hasHistoryBackButton = true}) : super();
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +21,7 @@ class SkinDetectAppBar extends StatelessWidget with PreferredSizeWidget {
         height: _height - 32,
         child: Stack(
           children: <Widget>[
-            Navigator.canPop(context)
+            (Navigator.canPop(context) && hasHistoryBackButton)
                 ? Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[

@@ -4,10 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
 class ImageProcessor extends StatefulWidget {
-
-
   final File _imageFile;
-
 
   ImageProcessor(this._imageFile);
 
@@ -59,7 +56,8 @@ class _ImageProcessorState extends State<ImageProcessor> {
               child: Text(
                 "Diagnose",
                 textAlign: TextAlign.center,
-                style: style.copyWith(color: Colors.blue, fontWeight: FontWeight.bold),
+                style: style.copyWith(
+                    color: Colors.blue, fontWeight: FontWeight.bold),
               ),
             ),
           ],

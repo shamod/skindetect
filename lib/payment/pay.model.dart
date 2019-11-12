@@ -1,20 +1,22 @@
 import 'dart:ffi';
 
 class Pay {
-  String number;
-  String expMonth;
-  String expYear;
-  String cvc;
 
-  toJson() => {
-      'card': {
-        'number': number,
-        'exp_month': expMonth,
-        'exp_year': expYear,
-        'cvc': cvc,
-      }
-  };
+  String creditCardNumber;
+  String expirationMonth;
+  String expirationYear;
+  String cardVerificationCode;
 
-  toForm() => 'card[number]=' + number + '&' + 'card[exp_month]=' + expMonth + '&' + 'card[exp_year]=' + expYear + '&' + 'card[cvc]=' + cvc;
+  Map<String, dynamic> toJson() => {
+        'number': creditCardNumber,
+        'exp_month': expirationMonth,
+        'exp_year': expirationYear,
+        'cvc': cardVerificationCode,
+      };
 
+  String toForm() => 'card[number]=' + creditCardNumber + '&' +
+                     'card[exp_month]=' + expirationMonth + '&' +
+                     'card[exp_year]=' + expirationYear + '&' +
+                     'card[cvc]=' + cardVerificationCode;
 }
+

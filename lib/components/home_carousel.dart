@@ -1,10 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 
-final List<String> imgList = [
-  'https://images.unsplash.com/photo-1520342868574-5fa3804e551c?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=6ff92caffcdd63681a35134a6770ed3b&auto=format&fit=crop&w=1951&q=80',
-  'https://images.unsplash.com/photo-1522205408450-add114ad53fe?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=368f45b0888aeb0b7b08e3a1084d3ede&auto=format&fit=crop&w=1950&q=80',
-  'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=94a1e718d89ca60a6337a6008341ca50&auto=format&fit=crop&w=1950&q=80',
+final List<Map> slides = [
+  {
+    'image': 'assets/images/slide_01.jpg',
+    'headline': 'Powered by AI',
+    'subheading': 'Skin disease detection'
+  },
+  {
+    'image': 'assets/images/slide_02.jpg',
+    'headline': 'Advanced detection',
+    'subheading': '10+ skin disease classifications'
+  },
+  {
+    'image': 'assets/images/slide_03.jpg',
+    'headline': 'Easy to use',
+    'subheading': "Using your phone's camera."
+  }
 ];
 
 List<T> map<T>(List list, Function handler) {
@@ -18,14 +30,14 @@ List<T> map<T>(List list, Function handler) {
 
 List<Widget> Function(double height) createChildren = (double height) {
   return map<Widget>(
-    imgList,
-    (index, i) {
+    slides,
+    (index, slide) {
       return Container(
         margin: EdgeInsets.symmetric(horizontal: 4.0, vertical: 8.0),
         child: ClipRRect(
           borderRadius: BorderRadius.all(Radius.circular(5.0)),
           child: Stack(children: <Widget>[
-            Image.network(i, fit: BoxFit.cover, height: height),
+            Image.asset(slide['image'], fit: BoxFit.cover, height: height),
             Positioned(
               bottom: 0.0,
               left: 0.0,
@@ -47,7 +59,7 @@ List<Widget> Function(double height) createChildren = (double height) {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
                       Text(
-                        'Headline Text',
+                        slide['headline'],
                         style: TextStyle(
                           color: Colors.white,
                           fontSize: 24.0,
@@ -55,7 +67,7 @@ List<Widget> Function(double height) createChildren = (double height) {
                         ),
                       ),
                       Text(
-                        'Lorem to the ipsum.',
+                        slide['subheading'],
                         style: TextStyle(
                           color: Colors.white,
                           fontSize: 16.0,
@@ -104,7 +116,7 @@ class _CarouselWithIndicatorState extends State<CarouselWithIndicator> {
       Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: map<Widget>(
-          imgList,
+          slides,
           (index, url) {
             return Container(
               width: 8.0,

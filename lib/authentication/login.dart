@@ -1,7 +1,9 @@
+import 'dart:ui';
+import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:skindetect/authentication/auth.service.dart';
 import 'package:skindetect/authentication/user.model.dart';
-import '../components/skin_detect_app_bar.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -22,85 +24,185 @@ class LoginPageFormState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: SkinDetectAppBar(),
-      body: Form(
-        key: _formKey,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            _emailField(),
-            _passwordField(),
-            _loginButton(context),
-          ],
-        ),
-      ),
-    );
-  }
-
-  _emailField() {
-    return Padding(
-      padding: const EdgeInsets.all(16.0),
-      child: TextFormField(
-        decoration: InputDecoration(
-          labelText: 'Email',
-          contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
-          hintText: "Email",
-          border: OutlineInputBorder(borderRadius: BorderRadius.circular(32.0)),
-        ),
-        validator: (value) {
-          if (value.isEmpty) {
-            return 'Please enter some text';
-          }
-          return null;
-        },
-        onChanged: (val) => setState(() => _user.email = val),
-      ),
-    );
-  }
-
-  _passwordField() {
-     return Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: TextFormField(
-          obscureText: true,
-          decoration: InputDecoration(
-            labelText: 'Password',
-            contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
-            hintText: "Password",
-            border: OutlineInputBorder(borderRadius: BorderRadius.circular(32.0)),
-          ),
-          validator: (value) {
-            if (value.isEmpty) {
-              return 'Please enter some text';
-            }
-            return null;
-          },
-          onChanged: (val) => setState(() => _user.password = val),
-        ),
-      );
-  }
-
-  _loginButton(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(16.0),
-      child: Material(
-        elevation: 5.0,
-        borderRadius: BorderRadius.circular(30.0),
-        color: Color(0xff01A0C7),
-        child: MaterialButton(
-          minWidth: MediaQuery.of(context).size.width,
-          padding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
-          onPressed: () {
-            if (_formKey.currentState.validate()) {
-              AuthenticationService.verifyLogin(_user);
-            }
-          },
-          child: Text("Login",
-              textAlign: TextAlign.center,
-              style: style.copyWith(
-                  color: Colors.white, fontWeight: FontWeight.bold)),
-        ),
-      ),
+      body: Stack(alignment: Alignment.topCenter, children: <Widget>[
+        Image.asset('assets/images/auth_background.jpg',
+            fit: BoxFit.cover, width: MediaQuery.of(context).size.width),
+        LayoutBuilder(builder: (context, constraint) {
+          return SingleChildScrollView(
+              child: ConstrainedBox(
+                  constraints: BoxConstraints(minHeight: constraint.maxHeight),
+                  child: IntrinsicHeight(
+                      child: Column(children: <Widget>[
+                    Stack(
+                      children: <Widget>[
+                        Container(
+                          height: 64,
+                          child: Row(
+                            children: <Widget>[
+                              IconButton(
+                                  icon: Icon(Icons.navigate_before),
+                                  color: Colors.white,
+                                  onPressed: () =>
+                                      Navigator.pushNamed(context, '/'))
+                            ],
+                          ),
+                        )
+                      ],
+                    ),
+                    Expanded(
+                        child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: <Widget>[
+                          SvgPicture.asset('assets/images/logo.svg',
+                              color: Colors.white,
+                              height: 128,
+                              semanticsLabel: 'SkinDetect Logo'),
+                          Padding(
+                              padding: EdgeInsets.only(top: 16),
+                              child: Column(
+                                children: <Widget>[
+                                  Padding(
+                                      padding: EdgeInsets.all(8),
+                                      child: ClipRRect(
+                                        borderRadius:
+                                            BorderRadius.circular(4.0),
+                                        child: BackdropFilter(
+                                          filter: ImageFilter.blur(
+                                              sigmaX: 10.0, sigmaY: 10.0),
+                                          child: Container(
+                                              child: TextFormField(
+                                                  validator: (value) {
+                                                    if (value.isEmpty) {
+                                                      return 'Email address required.';
+                                                    }
+                                                    return null;
+                                                  },
+                                                  onChanged: (val) => setState(
+                                                      () => _user.email = val),
+                                                  style: TextStyle(
+                                                      color: Colors.white),
+                                                  decoration: InputDecoration(
+                                                      border: InputBorder.none,
+                                                      labelText: 'Email',
+                                                      hintText: 'Email',
+                                                      hintStyle: TextStyle(
+                                                          color: Colors.white),
+                                                      labelStyle: TextStyle(
+                                                          color: Colors.white),
+                                                      filled: true,
+                                                      fillColor: Color.fromARGB(
+                                                          64, 0, 0, 0)))),
+                                        ),
+                                      )),
+                                  Padding(
+                                      padding: EdgeInsets.all(8),
+                                      child: ClipRRect(
+                                        borderRadius:
+                                            BorderRadius.circular(4.0),
+                                        child: BackdropFilter(
+                                          filter: ImageFilter.blur(
+                                              sigmaX: 10.0, sigmaY: 10.0),
+                                          child: Container(
+                                              child: TextFormField(
+                                                  style: TextStyle(
+                                                      color: Colors.white),
+                                                  validator: (value) {
+                                                    if (value.isEmpty) {
+                                                      return 'Password required.';
+                                                    }
+                                                    return null;
+                                                  },
+                                                  onChanged: (val) => setState(
+                                                      () =>
+                                                          _user.password = val),
+                                                  decoration: InputDecoration(
+                                                      border: InputBorder.none,
+                                                      labelText: 'Password',
+                                                      hintText: 'Password',
+                                                      hintStyle: TextStyle(
+                                                          color: Colors.white),
+                                                      labelStyle: TextStyle(
+                                                          color: Colors.white),
+                                                      filled: true,
+                                                      fillColor: Color.fromARGB(
+                                                          64, 0, 0, 0)))),
+                                        ),
+                                      )),
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.end,
+                                    children: <Widget>[
+                                      Padding(
+                                        padding: EdgeInsets.all(8),
+                                        child: OutlineButton(
+                                          onPressed: () {
+                                            if (_formKey.currentState
+                                                .validate()) {
+                                              AuthenticationService
+                                                      .endpointPost(
+                                                          'login', _user)
+                                                  .then((res) {
+                                                try {
+                                                  Map resObj =
+                                                      json.decode(res.body);
+                                                  if (resObj['status']
+                                                          ['type'] ==
+                                                      'success') {
+                                                    Navigator.pushNamed(
+                                                        context, '/diagnose');
+                                                  }
+                                                } catch (err) {
+                                                  print(err);
+                                                }
+                                              });
+                                            }
+                                          },
+                                          textColor: Colors.white,
+                                          child: Padding(
+                                            padding: EdgeInsets.all(16),
+                                            child: Text("Sign in"),
+                                          ),
+                                          borderSide: BorderSide(
+                                            color: Colors.white,
+                                            style: BorderStyle.solid,
+                                            width: 0.8,
+                                          ),
+                                        ),
+                                      )
+                                    ],
+                                  )
+                                ],
+                              ))
+                        ])),
+                    Container(
+                        height: 64,
+                        decoration: BoxDecoration(
+                          border: Border(
+                            top: BorderSide(
+                              width: 1.0,
+                              color: Color.fromARGB(40, 255, 255, 255),
+                            ),
+                          ),
+                          color: Color.fromARGB(40, 255, 255, 255),
+                        ),
+                        child: MaterialButton(
+                          onPressed: () {
+                            Navigator.pushNamed(context, '/register');
+                          },
+                          child: SizedBox.expand(
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: <Widget>[
+                                Text(
+                                  'Need to create an account?',
+                                  style: TextStyle(color: Colors.white),
+                                )
+                              ],
+                            ),
+                          ),
+                        )),
+                  ]))));
+        })
+      ]),
     );
   }
 }

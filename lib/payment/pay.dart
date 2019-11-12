@@ -1,14 +1,10 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:skindetect/payment/pay.model.dart';
 import 'package:skindetect/payment/pay.service.dart';
-//import 'package:stripe_payment/stripe_payment.dart';
 
 import '../components/skin_detect_app_bar.dart';
 
 class PayPage extends StatefulWidget {
-
   _PayPageState createState() => _PayPageState();
 }
 
@@ -20,23 +16,23 @@ class _PayPageState extends State<PayPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: SkinDetectAppBar(),
-    body: SingleChildScrollView(
-      scrollDirection: Axis.vertical,
-      child: Form(
-        key: _formKey,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            _creditCardNumberField(),
-            _expirationMonthField(),
-            _expirationYearField(),
-            _CVCField(),
-            _payButton(context),
-          ],
+      appBar: SkinDetectAppBar(),
+      body: SingleChildScrollView(
+        scrollDirection: Axis.vertical,
+        child: Form(
+          key: _formKey,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              _creditCardNumberField(),
+              _expirationMonthField(),
+              _expirationYearField(),
+              _cardVerificationCodeField(),
+              _payButton(context),
+            ],
+          ),
         ),
       ),
-    ),
     );
   }
 
@@ -56,7 +52,7 @@ class _PayPageState extends State<PayPage> {
           }
           return null;
         },
-        onChanged: (val) => setState(() => _pay.number = val),
+        onChanged: (val) => setState(() => _pay.creditCardNumber = val),
       ),
     );
   }
@@ -77,7 +73,7 @@ class _PayPageState extends State<PayPage> {
           }
           return null;
         },
-        onChanged: (val) => setState(() => _pay.expMonth = val),
+        onChanged: (val) => setState(() => _pay.expirationMonth = val),
       ),
     );
   }
@@ -98,12 +94,12 @@ class _PayPageState extends State<PayPage> {
           }
           return null;
         },
-        onChanged: (val) => setState(() => _pay.expYear = val),
+        onChanged: (val) => setState(() => _pay.expirationYear = val),
       ),
     );
   }
 
-  _CVCField() {
+  _cardVerificationCodeField() {
     return Padding(
       padding: const EdgeInsets.all(16.0),
       child: TextFormField(
@@ -119,7 +115,7 @@ class _PayPageState extends State<PayPage> {
           }
           return null;
         },
-        onChanged: (val) => setState(() => _pay.cvc = val),
+        onChanged: (val) => setState(() => _pay.cardVerificationCode = val),
       ),
     );
   }
@@ -136,16 +132,10 @@ class _PayPageState extends State<PayPage> {
           padding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
           onPressed: () async {
             if(_formKey.currentState.validate()) {
-              Pay creditCardInfo = Pay();
-              creditCardInfo.number = _pay.number;
-              creditCardInfo.expMonth = _pay.expMonth;
-              creditCardInfo.expYear = _pay.expYear;
-              creditCardInfo.cvc = _pay.cvc;
-
-              var card = creditCardInfo.toForm();
-              var token = await PayService.createToken(card, 'pk_test_4f6xxU4M7IJpjubbYsfgaJqH');
+              var card = _pay.toForm();
+              var token = await PayService.generateToken(card, 'pk_test_4f6xxU4M7IJpjubbYsfgaJqH');
               if(token['id'] != null) {
-                var response = await PayService.chargeStripe(token['id']);
+                var response = await PayService.postCharge(token['id']);
                 print(response);
               }
             }
