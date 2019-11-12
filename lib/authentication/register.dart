@@ -196,7 +196,6 @@ class RegisterPageFormState extends State<RegisterPage> {
                                                 try {
                                                   Map resObj =
                                                       json.decode(res.body);
-                                                  print(resObj);
                                                   if (resObj['status']
                                                           ['type'] ==
                                                       'success') {
