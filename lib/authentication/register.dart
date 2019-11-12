@@ -146,6 +146,7 @@ class RegisterPageFormState extends State<RegisterPage> {
                                               sigmaX: 10.0, sigmaY: 10.0),
                                           child: Container(
                                               child: TextFormField(
+                                                  obscureText: true,
                                                   style: TextStyle(
                                                       color: Colors.white),
                                                   validator: (value) {

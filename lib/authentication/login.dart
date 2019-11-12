@@ -108,6 +108,7 @@ class LoginPageFormState extends State<LoginPage> {
                                               sigmaX: 10.0, sigmaY: 10.0),
                                           child: Container(
                                               child: TextFormField(
+                                                  obscureText: true,
                                                   style: TextStyle(
                                                       color: Colors.white),
                                                   validator: (value) {
