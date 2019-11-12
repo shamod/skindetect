@@ -1,5 +1,9 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:skindetect/payment/pay.model.dart';
+import 'package:skindetect/payment/pay.service.dart';
+//import 'package:stripe_payment/stripe_payment.dart';
 
 import '../components/skin_detect_app_bar.dart';
 
@@ -25,7 +29,8 @@ class _PayPageState extends State<PayPage> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             _creditCardNumberField(),
-            _expirationDateField(),
+            _expirationMonthField(),
+            _expirationYearField(),
             _CVCField(),
             _payButton(context),
           ],
@@ -51,19 +56,19 @@ class _PayPageState extends State<PayPage> {
           }
           return null;
         },
-        onChanged: (val) => setState(() => _pay.creditCardNumber = val),
+        onChanged: (val) => setState(() => _pay.number = val),
       ),
     );
   }
 
-  _expirationDateField() {
+  _expirationMonthField() {
     return Padding(
       padding: const EdgeInsets.all(16.0),
       child: TextFormField(
         decoration: InputDecoration(
-          labelText: 'Expiration Date',
+          labelText: 'Expiration Month',
           contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
-          hintText: "Expiration Date",
+          hintText: "Expiration Month",
           border: OutlineInputBorder(borderRadius: BorderRadius.circular(32.0)),
         ),
         validator: (value) {
@@ -72,7 +77,28 @@ class _PayPageState extends State<PayPage> {
           }
           return null;
         },
-        onChanged: (val) => setState(() => _pay.expirationDate = val),
+        onChanged: (val) => setState(() => _pay.expMonth = val),
+      ),
+    );
+  }
+
+  _expirationYearField() {
+    return Padding(
+      padding: const EdgeInsets.all(16.0),
+      child: TextFormField(
+        decoration: InputDecoration(
+          labelText: 'Expiration Year',
+          contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
+          hintText: "Expiration Year",
+          border: OutlineInputBorder(borderRadius: BorderRadius.circular(32.0)),
+        ),
+        validator: (value) {
+          if (value.isEmpty) {
+            return 'Please enter some text';
+          }
+          return null;
+        },
+        onChanged: (val) => setState(() => _pay.expYear = val),
       ),
     );
   }
@@ -93,7 +119,7 @@ class _PayPageState extends State<PayPage> {
           }
           return null;
         },
-        onChanged: (val) => setState(() => _pay.CVC = val),
+        onChanged: (val) => setState(() => _pay.cvc = val),
       ),
     );
   }
@@ -108,9 +134,20 @@ class _PayPageState extends State<PayPage> {
         child: MaterialButton(
           minWidth: MediaQuery.of(context).size.width,
           padding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
-          onPressed: () {
+          onPressed: () async {
             if(_formKey.currentState.validate()) {
+              Pay creditCardInfo = Pay();
+              creditCardInfo.number = _pay.number;
+              creditCardInfo.expMonth = _pay.expMonth;
+              creditCardInfo.expYear = _pay.expYear;
+              creditCardInfo.cvc = _pay.cvc;
 
+              var card = creditCardInfo.toForm();
+              var token = await PayService.createToken(card, 'pk_test_4f6xxU4M7IJpjubbYsfgaJqH');
+              if(token['id'] != null) {
+                var response = await PayService.chargeStripe(token['id']);
+                print(response);
+              }
             }
           },
           child: Text("Submit Payment",

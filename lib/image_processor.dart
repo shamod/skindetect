@@ -1,9 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
-import 'package:tflite/tflite.dart';
 
 class ImageProcessor extends StatefulWidget {
 
@@ -29,12 +27,6 @@ class _ImageProcessorState extends State<ImageProcessor> {
     setState(() {
       this._imageFile = widget._imageFile;
     });
-
-//    _loadModel().then((val) {
-//      setState(() {
-//        _busy = false;
-//      });
-//    });
   }
 
   @override
@@ -74,27 +66,5 @@ class _ImageProcessorState extends State<ImageProcessor> {
         ],
       ),
     );
-  }
-
-  _loadModel() async {
-    Tflite.close();
-
-    try {
-      String res = await Tflite.loadModel(
-                            model: "assets/model/skinmodel.tflite",
-                          );
-      print(res);
-    } on PlatformException catch(e) {
-      print(e);
-    }
-  }
-
-  _predictImage() async {
-    if (_imageFile != null) {
-      var recognitions = await Tflite.runModelOnImage(
-          path: _imageFile.path,
-      );
-      print(recognitions);
-    }
   }
 }

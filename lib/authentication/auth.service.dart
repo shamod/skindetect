@@ -10,8 +10,6 @@ class AuthenticationService {
     try{
       var url = 'http://10.0.0.198:5000/register';
       response = await http.post(url, body: json.encode(body.toJson()), headers: {"Content-type": "application/json", "Accept": "application/json"});
-      print('Response status: ${response.statusCode}');
-      print('Response body: ${response.body}');
       return response;
     }
     catch(e){
@@ -26,8 +24,6 @@ class AuthenticationService {
     try{
       var url = 'http://10.0.0.198:5000/login';
       response = await http.post(url, body: json.encode(body.toJson()), headers: {"Content-type": "application/json", "Accept": "application/json"});
-      print('Response status: ${response.statusCode}');
-      print('Response body: ${response.body}');
       return response;
     }
     catch(e){
