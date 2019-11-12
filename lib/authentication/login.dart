@@ -86,7 +86,11 @@ class LoginPageFormState extends State<LoginPage> {
                                                       labelText: 'Email',
                                                       hintText: 'Email',
                                                       hintStyle: TextStyle(
-                                                          color: Colors.white),
+                                                          color: Color.fromARGB(
+                                                              127,
+                                                              255,
+                                                              255,
+                                                              255)),
                                                       labelStyle: TextStyle(
                                                           color: Colors.white),
                                                       filled: true,
@@ -120,7 +124,11 @@ class LoginPageFormState extends State<LoginPage> {
                                                       labelText: 'Password',
                                                       hintText: 'Password',
                                                       hintStyle: TextStyle(
-                                                          color: Colors.white),
+                                                          color: Color.fromARGB(
+                                                              127,
+                                                              255,
+                                                              255,
+                                                              255)),
                                                       labelStyle: TextStyle(
                                                           color: Colors.white),
                                                       filled: true,

@@ -87,7 +87,11 @@ class RegisterPageFormState extends State<RegisterPage> {
                                                       labelText: 'Name',
                                                       hintText: 'Name',
                                                       hintStyle: TextStyle(
-                                                          color: Colors.white),
+                                                          color: Color.fromARGB(
+                                                              127,
+                                                              255,
+                                                              255,
+                                                              255)),
                                                       labelStyle: TextStyle(
                                                           color: Colors.white),
                                                       filled: true,
@@ -120,7 +124,11 @@ class RegisterPageFormState extends State<RegisterPage> {
                                                       labelText: 'Email',
                                                       hintText: 'Email',
                                                       hintStyle: TextStyle(
-                                                          color: Colors.white),
+                                                          color: Color.fromARGB(
+                                                              127,
+                                                              255,
+                                                              255,
+                                                              255)),
                                                       labelStyle: TextStyle(
                                                           color: Colors.white),
                                                       filled: true,
@@ -154,7 +162,11 @@ class RegisterPageFormState extends State<RegisterPage> {
                                                       labelText: 'Password',
                                                       hintText: 'Password',
                                                       hintStyle: TextStyle(
-                                                          color: Colors.white),
+                                                          color: Color.fromARGB(
+                                                              127,
+                                                              255,
+                                                              255,
+                                                              255)),
                                                       labelStyle: TextStyle(
                                                           color: Colors.white),
                                                       filled: true,
