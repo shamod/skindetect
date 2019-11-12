@@ -50,6 +50,8 @@ class LoginPageFormState extends State<LoginPage> {
                       ],
                     ),
                     Expanded(
+                        child: Form(
+                        key: _formKey,
                         child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: <Widget>[
@@ -82,6 +84,7 @@ class LoginPageFormState extends State<LoginPage> {
                                                   style: TextStyle(
                                                       color: Colors.white),
                                                   decoration: InputDecoration(
+                                                      errorStyle: TextStyle(color: Colors.white),
                                                       border: InputBorder.none,
                                                       labelText: 'Email',
                                                       hintText: 'Email',
@@ -121,6 +124,7 @@ class LoginPageFormState extends State<LoginPage> {
                                                       () =>
                                                           _user.password = val),
                                                   decoration: InputDecoration(
+                                                      errorStyle: TextStyle(color: Colors.white),
                                                       border: InputBorder.none,
                                                       labelText: 'Password',
                                                       hintText: 'Password',
@@ -181,7 +185,7 @@ class LoginPageFormState extends State<LoginPage> {
                                   )
                                 ],
                               ))
-                        ])),
+                        ]))),
                     Container(
                         height: 64,
                         decoration: BoxDecoration(
