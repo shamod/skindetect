@@ -30,20 +30,18 @@ class RegisterPageFormState extends State<RegisterPage> {
         Column(children: <Widget>[
           Stack(
             children: <Widget>[
-              Navigator.canPop(context)
-                  ? Container(
-                      height: 64,
-                      child: Row(
-                        children: <Widget>[
-                          IconButton(
-                            icon: Icon(Icons.navigate_before),
-                            color: Colors.white,
-                            onPressed: () => Navigator.pop(context),
-                          )
-                        ],
-                      ),
+              Container(
+                height: 64,
+                child: Row(
+                  children: <Widget>[
+                    IconButton(
+                      icon: Icon(Icons.navigate_before),
+                      color: Colors.white,
+                      onPressed: () => Navigator.pushNamed(context, '/'),
                     )
-                  : Container(),
+                  ],
+                ),
+              )
             ],
           ),
           Expanded(
