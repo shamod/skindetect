@@ -50,6 +50,8 @@ class LoginPageFormState extends State<LoginPage> {
                       ],
                     ),
                     Expanded(
+                        child: Form(
+                        key: _formKey,
                         child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: <Widget>[
@@ -82,11 +84,16 @@ class LoginPageFormState extends State<LoginPage> {
                                                   style: TextStyle(
                                                       color: Colors.white),
                                                   decoration: InputDecoration(
+                                                      errorStyle: TextStyle(color: Colors.white),
                                                       border: InputBorder.none,
                                                       labelText: 'Email',
                                                       hintText: 'Email',
                                                       hintStyle: TextStyle(
-                                                          color: Colors.white),
+                                                          color: Color.fromARGB(
+                                                              127,
+                                                              255,
+                                                              255,
+                                                              255)),
                                                       labelStyle: TextStyle(
                                                           color: Colors.white),
                                                       filled: true,
@@ -104,6 +111,7 @@ class LoginPageFormState extends State<LoginPage> {
                                               sigmaX: 10.0, sigmaY: 10.0),
                                           child: Container(
                                               child: TextFormField(
+                                                  obscureText: true,
                                                   style: TextStyle(
                                                       color: Colors.white),
                                                   validator: (value) {
@@ -116,11 +124,16 @@ class LoginPageFormState extends State<LoginPage> {
                                                       () =>
                                                           _user.password = val),
                                                   decoration: InputDecoration(
+                                                      errorStyle: TextStyle(color: Colors.white),
                                                       border: InputBorder.none,
                                                       labelText: 'Password',
                                                       hintText: 'Password',
                                                       hintStyle: TextStyle(
-                                                          color: Colors.white),
+                                                          color: Color.fromARGB(
+                                                              127,
+                                                              255,
+                                                              255,
+                                                              255)),
                                                       labelStyle: TextStyle(
                                                           color: Colors.white),
                                                       filled: true,
@@ -172,7 +185,7 @@ class LoginPageFormState extends State<LoginPage> {
                                   )
                                 ],
                               ))
-                        ])),
+                        ]))),
                     Container(
                         height: 64,
                         decoration: BoxDecoration(

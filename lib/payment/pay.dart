@@ -1,10 +1,11 @@
+import 'dart:ui';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:skindetect/payment/pay.model.dart';
 import 'package:skindetect/payment/pay.service.dart';
 
-import '../components/skin_detect_app_bar.dart';
-
 class PayPage extends StatefulWidget {
+  @override
   _PayPageState createState() => _PayPageState();
 }
 
@@ -16,136 +17,232 @@ class _PayPageState extends State<PayPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: SkinDetectAppBar(),
-      body: SingleChildScrollView(
-        scrollDirection: Axis.vertical,
-        child: Form(
-          key: _formKey,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              _creditCardNumberField(),
-              _expirationMonthField(),
-              _expirationYearField(),
-              _cardVerificationCodeField(),
-              _payButton(context),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
+      body: Stack(alignment: Alignment.topCenter, children: <Widget>[
+        Image.asset('assets/images/auth_background.jpg',
+            fit: BoxFit.cover, width: MediaQuery.of(context).size.width),
+        LayoutBuilder(builder: (context, constraint) {
+          return SingleChildScrollView(
+              child: ConstrainedBox(
+                  constraints: BoxConstraints(minHeight: constraint.maxHeight),
+                  child: IntrinsicHeight(
+                      child: Column(children: <Widget>[
+                    Stack(
+                      children: <Widget>[
+                        Container(
+                          height: 64,
+                          child: Row(
+                            children: <Widget>[
+                              IconButton(
+                                icon: Icon(Icons.navigate_before),
+                                color: Colors.white,
+                                onPressed: () =>
+                                    Navigator.pushNamed(context, '/diagnose'),
+                              )
+                            ],
+                          ),
+                        )
+                      ],
+                    ),
+                    Expanded(
+                        child: Form(
+                        key: _formKey,
+                        child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: <Widget>[
+                          SvgPicture.asset('assets/images/logo.svg',
+                              color: Colors.white,
+                              height: 128,
+                              semanticsLabel: 'SkinDetect Logo'),
+                          Padding(
+                              padding: EdgeInsets.only(top: 16),
+                              child: Column(
+                                children: <Widget>[
+                                  Padding(
+                                      padding: EdgeInsets.all(8),
+                                      child: ClipRRect(
+                                        borderRadius:
+                                            BorderRadius.circular(4.0),
+                                        child: BackdropFilter(
+                                          filter: ImageFilter.blur(
+                                              sigmaX: 10.0, sigmaY: 10.0),
+                                          child: Container(
+                                              child: TextFormField(
+                                                  validator: (value) {
+                                                    if (value.isEmpty) {
+                                                      return 'Please enter some text';
+                                                    }
+                                                    return null;
+                                                  },
+                                                  onChanged: (val) => setState(() => _pay.creditCardNumber = val),
+                                                  style: TextStyle(
+                                                      color: Colors.white),
+                                                  decoration: InputDecoration(
+                                                      errorStyle: TextStyle(color: Colors.white),
+                                                      border: InputBorder.none,
+                                                      labelText: 'Credit Card Number',
+                                                      hintText: 'Credit Card Number',
+                                                      hintStyle: TextStyle(
+                                                          color: Color.fromARGB(
+                                                              127,
+                                                              255,
+                                                              255,
+                                                              255)),
+                                                      labelStyle: TextStyle(
+                                                          color: Colors.white),
+                                                      filled: true,
+                                                      fillColor: Color.fromARGB(
+                                                          64, 0, 0, 0)))),
+                                        ),
+                                      )),
+                                    Padding(
+                                      padding: EdgeInsets.all(8),
+                                      child: ClipRRect(
+                                        borderRadius:
+                                            BorderRadius.circular(4.0),
+                                        child: BackdropFilter(
+                                          filter: ImageFilter.blur(
+                                              sigmaX: 10.0, sigmaY: 10.0),
+                                          child: Container(
+                                              child: TextFormField(
+                                                  validator: (value) {
+                                                    if (value.isEmpty) {
+                                                      return 'Please enter some text';
+                                                    }
+                                                    return null;
+                                                  },
+                                                  onChanged: (val) => setState(() => _pay.expirationMonth = val),
+                                                  style: TextStyle(
+                                                      color: Colors.white),
+                                                  decoration: InputDecoration(
+                                                      errorStyle: TextStyle(color: Colors.white),
+                                                      border: InputBorder.none,
+                                                      labelText: 'Expiration Month',
+                                                      hintText: 'Expiration Month',
+                                                      hintStyle: TextStyle(
+                                                          color: Color.fromARGB(
+                                                              127,
+                                                              255,
+                                                              255,
+                                                              255)),
+                                                      labelStyle: TextStyle(
+                                                          color: Colors.white),
+                                                      filled: true,
+                                                      fillColor: Color.fromARGB(
+                                                          64, 0, 0, 0)))),
+                                        ),
+                                      )),
+                                      Padding(
+                                      padding: EdgeInsets.all(8),
+                                      child: ClipRRect(
+                                        borderRadius:
+                                            BorderRadius.circular(4.0),
+                                        child: BackdropFilter(
+                                          filter: ImageFilter.blur(
+                                              sigmaX: 10.0, sigmaY: 10.0),
+                                          child: Container(
+                                              child: TextFormField(
+                                                  validator: (value) {
+                                                    if (value.isEmpty) {
+                                                      return 'Please enter some text';
+                                                    }
+                                                    return null;
+                                                  },
+                                                  onChanged: (val) => setState(() => _pay.expirationYear = val),
+                                                  style: TextStyle(
+                                                      color: Colors.white),
+                                                  decoration: InputDecoration(
+                                                      errorStyle: TextStyle(color: Colors.white),
+                                                      border: InputBorder.none,
+                                                      labelText: 'Expiration Year',
+                                                      hintText: 'Expiration Year',
+                                                      hintStyle: TextStyle(
+                                                          color: Color.fromARGB(
+                                                              127,
+                                                              255,
+                                                              255,
+                                                              255)),
+                                                      labelStyle: TextStyle(
+                                                          color: Colors.white),
+                                                      filled: true,
+                                                      fillColor: Color.fromARGB(
+                                                          64, 0, 0, 0)))),
+                                        ),
+                                      )),
 
-  _creditCardNumberField() {
-    return Padding(
-      padding: const EdgeInsets.all(16.0),
-      child: TextFormField(
-        decoration: InputDecoration(
-          labelText: 'Credit Card Number',
-          contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
-          hintText: "Credit Card Number",
-          border: OutlineInputBorder(borderRadius: BorderRadius.circular(32.0)),
-        ),
-        validator: (value) {
-          if (value.isEmpty) {
-            return 'Please enter some text';
-          }
-          return null;
-        },
-        onChanged: (val) => setState(() => _pay.creditCardNumber = val),
-      ),
-    );
-  }
+                                      Padding(
+                                      padding: EdgeInsets.all(8),
+                                      child: ClipRRect(
+                                        borderRadius:
+                                            BorderRadius.circular(4.0),
+                                        child: BackdropFilter(
+                                          filter: ImageFilter.blur(
+                                              sigmaX: 10.0, sigmaY: 10.0),
+                                          child: Container(
+                                              child: TextFormField(
+                                                  validator: (value) {
+                                                    if (value.isEmpty) {
+                                                      return 'Please enter some text';
+                                                    }
+                                                    return null;
+                                                  },
+                                                  onChanged: (val) => setState(() => _pay.cardVerificationCode = val),
+                                                  style: TextStyle(
+                                                      color: Colors.white),
+                                                  decoration: InputDecoration(
+                                                      errorStyle: TextStyle(color: Colors.white),
+                                                      border: InputBorder.none,
+                                                      labelText: 'CVC',
+                                                      hintText: 'CVC',
+                                                      hintStyle: TextStyle(
+                                                          color: Color.fromARGB(
+                                                              127,
+                                                              255,
+                                                              255,
+                                                              255)),
+                                                      labelStyle: TextStyle(
+                                                          color: Colors.white),
+                                                      filled: true,
+                                                      fillColor: Color.fromARGB(
+                                                          64, 0, 0, 0)))),
+                                        ),
+                                      )),
 
-  _expirationMonthField() {
-    return Padding(
-      padding: const EdgeInsets.all(16.0),
-      child: TextFormField(
-        decoration: InputDecoration(
-          labelText: 'Expiration Month',
-          contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
-          hintText: "Expiration Month",
-          border: OutlineInputBorder(borderRadius: BorderRadius.circular(32.0)),
-        ),
-        validator: (value) {
-          if (value.isEmpty) {
-            return 'Please enter some text';
-          }
-          return null;
-        },
-        onChanged: (val) => setState(() => _pay.expirationMonth = val),
-      ),
-    );
-  }
-
-  _expirationYearField() {
-    return Padding(
-      padding: const EdgeInsets.all(16.0),
-      child: TextFormField(
-        decoration: InputDecoration(
-          labelText: 'Expiration Year',
-          contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
-          hintText: "Expiration Year",
-          border: OutlineInputBorder(borderRadius: BorderRadius.circular(32.0)),
-        ),
-        validator: (value) {
-          if (value.isEmpty) {
-            return 'Please enter some text';
-          }
-          return null;
-        },
-        onChanged: (val) => setState(() => _pay.expirationYear = val),
-      ),
-    );
-  }
-
-  _cardVerificationCodeField() {
-    return Padding(
-      padding: const EdgeInsets.all(16.0),
-      child: TextFormField(
-        decoration: InputDecoration(
-          labelText: 'CVC',
-          contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
-          hintText: "CVC",
-          border: OutlineInputBorder(borderRadius: BorderRadius.circular(32.0)),
-        ),
-        validator: (value) {
-          if (value.isEmpty) {
-            return 'Please enter some text';
-          }
-          return null;
-        },
-        onChanged: (val) => setState(() => _pay.cardVerificationCode = val),
-      ),
-    );
-  }
-
-  _payButton(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(16.0),
-      child: Material(
-        elevation: 5.0,
-        borderRadius: BorderRadius.circular(30.0),
-        color: Color(0xff01A0C7),
-        child: MaterialButton(
-          minWidth: MediaQuery.of(context).size.width,
-          padding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
-          onPressed: () async {
-            if(_formKey.currentState.validate()) {
-              var card = _pay.toForm();
-              var token = await PayService.generateToken(card, 'pk_test_4f6xxU4M7IJpjubbYsfgaJqH');
-              if(token['id'] != null) {
-                var response = await PayService.postCharge(token['id']);
-                print(response);
-              }
-            }
-          },
-          child: Text("Submit Payment",
-              textAlign: TextAlign.center,
-              style: style.copyWith(
-                  color: Colors.white, fontWeight: FontWeight.bold)),
-        ),
-      ),
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.end,
+                                    children: <Widget>[
+                                      Padding(
+                                        padding: EdgeInsets.all(8),
+                                        child: OutlineButton(
+                                          onPressed: () async {
+                                            if(_formKey.currentState.validate()) {
+                                              var card = _pay.toForm();
+                                              var token = await PayService.generateToken(card, 'pk_test_4f6xxU4M7IJpjubbYsfgaJqH');
+                                              if(token['id'] != null) {
+                                                var response = await PayService.postCharge(token['id']);
+                                                print(response);
+                                              }
+                                            }
+                                          },
+                                          textColor: Colors.white,
+                                          child: Padding(
+                                            padding: EdgeInsets.all(16),
+                                            child: Text("Submit Purchase"),
+                                          ),
+                                          borderSide: BorderSide(
+                                            color: Colors.white,
+                                            style: BorderStyle.solid,
+                                            width: 0.8,
+                                          ),
+                                        ),
+                                      )
+                                    ],
+                                  )
+                                ],
+                              ))
+                        ]))),
+                  ]))));
+        })
+      ]),
     );
   }
 }
