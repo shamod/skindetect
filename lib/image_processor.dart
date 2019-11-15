@@ -1,5 +1,6 @@
+import 'dart:convert';
 import 'dart:io';
-
+import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
@@ -52,7 +53,7 @@ class _ImageProcessorState extends State<ImageProcessor> {
             MaterialButton(
               minWidth: MediaQuery.of(context).size.width,
               padding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
-              onPressed: () {},
+              onPressed: _upload,
               child: Text(
                 "Diagnose",
                 textAlign: TextAlign.center,
@@ -65,4 +66,31 @@ class _ImageProcessorState extends State<ImageProcessor> {
       ),
     );
   }
+
+  _upload() async {
+    if(_imageFile == null) return null;
+    const String serverBaseUrl = 'http://10.0.0.198:5000';
+    final url = '$serverBaseUrl/upload';
+    const Map<String, String> headers = {
+      "Content-type": "application/json",
+      "Accept": "application/json"
+    };
+
+    //create multipart request for POST or PATCH method
+    var request = http.MultipartRequest("POST", Uri.parse(url));
+
+    //create multipart using filepath, string or bytes
+    var pic = await http.MultipartFile.fromPath("file_field", _imageFile.path);
+
+    //add multipart to request
+    request.files.add(pic);
+    var response = await request.send();
+
+    //Get the response from the server
+    var responseData = await response.stream.toBytes();
+    var responseString = String.fromCharCodes(responseData);
+    print(responseString);
+  }
+
+
 }
