@@ -54,7 +54,16 @@ class DiagnosePage extends StatelessWidget {
                     ),
                   ],
                 ),
-                creditsRemaining == 0 ? _buyCreditButton(context) : Container(),
+                creditsRemaining == 0
+                    ? _buyCreditButton(context)
+                    : Padding(
+                        padding: EdgeInsets.only(top: 32, left: 16, right: 16),
+                        child: Text(
+                          "Tap the camera button, then upload your image to receive your results.",
+                          textAlign: TextAlign.center,
+                          style: TextStyle(fontSize: 18),
+                        ),
+                      ),
               ],
             ),
           ),
