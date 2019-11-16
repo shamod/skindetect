@@ -1,6 +1,8 @@
-# skindetect
+# SkinDetect
 
-Skin Disease Detect
+Skin Disease detection
+
+![Screenshots](https://user-images.githubusercontent.com/25379378/68987982-120d7b00-07e5-11ea-942d-3ec0cbd8fe4c.png)
 
 ## Getting Started
 
