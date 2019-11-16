@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'components/skin_detect_app_bar.dart';
 
 class ImageProcessor extends StatefulWidget {
   final File _imageFile;
@@ -30,38 +31,59 @@ class _ImageProcessorState extends State<ImageProcessor> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Image Processor'),
-        iconTheme: IconThemeData(color: Colors.white),
-      ),
+      appBar: SkinDetectAppBar(),
       body: ListView(
         children: <Widget>[
           if (this._imageFile != null) ...[
-            Image.file(this._imageFile),
-            Row(
+            Stack(
               children: <Widget>[
-                FlatButton(
-                  child: Icon(Icons.crop),
-                  onPressed: null,
+                Image.file(
+                  this._imageFile,
+                  fit: BoxFit.cover,
+                  height: MediaQuery.of(context).size.height - 88,
                 ),
-                FlatButton(
-                  child: Icon(Icons.refresh),
-                  onPressed: null,
-                ),
+                Container(
+                  height: MediaQuery.of(context).size.height - 88,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    mainAxisSize: MainAxisSize.max,
+                    children: <Widget>[
+                      Container(
+                        color: Colors.white,
+                        child: Padding(
+                          padding: EdgeInsets.all(8.0),
+                          child: MaterialButton(
+                              height: 64,
+                              color: Theme.of(context).primaryColor,
+                              minWidth: MediaQuery.of(context).size.width,
+                              onPressed: _upload,
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: <Widget>[
+                                  Text(
+                                    "Perform Classification",
+                                    textAlign: TextAlign.center,
+                                    style: style.copyWith(
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                  Padding(
+                                    padding: EdgeInsets.only(left: 8.0),
+                                    child: Icon(
+                                      Icons.cloud_upload,
+                                      size: 24.0,
+                                      color: Colors.white,
+                                    ),
+                                  )
+                                ],
+                              )),
+                        ),
+                      )
+                    ],
+                  ),
+                )
               ],
-            ),
-            MaterialButton(
-              minWidth: MediaQuery.of(context).size.width,
-              padding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
-              onPressed: _upload,
-              child: Text(
-                "Perform Classification",
-                textAlign: TextAlign.center,
-                style: style.copyWith(
-                    color: Theme.of(context).primaryColor,
-                    fontWeight: FontWeight.bold),
-              ),
-            ),
+            )
           ],
         ],
       ),
