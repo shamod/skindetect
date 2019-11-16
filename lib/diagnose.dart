@@ -59,7 +59,7 @@ class DiagnosePage extends StatelessWidget {
                     : Padding(
                         padding: EdgeInsets.only(top: 32, left: 16, right: 16),
                         child: Text(
-                          "Tap the camera button, then upload your image to receive your results.",
+                          "Tap the camera button, then upload an image to receive your results.",
                           textAlign: TextAlign.center,
                           style: TextStyle(fontSize: 18),
                         ),
