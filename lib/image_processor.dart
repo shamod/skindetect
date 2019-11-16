@@ -18,6 +18,7 @@ class _ImageProcessorState extends State<ImageProcessor> {
   File _imageFile;
   bool _busy = false;
   TextStyle style = TextStyle(fontFamily: 'Montserrat', fontSize: 20.0);
+  var result = [];
 
   void initState() {
     super.initState();
@@ -42,6 +43,30 @@ class _ImageProcessorState extends State<ImageProcessor> {
                   fit: BoxFit.cover,
                   height: MediaQuery.of(context).size.height - 88,
                 ),
+                result.length > 0
+                    ? Container(
+                        width: MediaQuery.of(context).size.width,
+                        color: Colors.black.withAlpha(225),
+                        child: Padding(
+                            padding: EdgeInsets.all(16.0),
+                            child: Column(
+                              children: <Widget>[
+                                Text(
+                                  "Your results:",
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 24.0,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                                Text(
+                                  "${result[0]} ${result[1]}",
+                                  style: TextStyle(
+                                      color: Colors.white, fontSize: 18.0),
+                                ),
+                              ],
+                            )),
+                      )
+                    : Container(),
                 Container(
                   height: MediaQuery.of(context).size.height - 88,
                   child: Column(
@@ -113,7 +138,9 @@ class _ImageProcessorState extends State<ImageProcessor> {
     var responseData = await response.stream.toBytes();
     var responseString = String.fromCharCodes(responseData);
     Map responseObj = json.decode(responseString);
-    var topResult = responseObj['probs'].first();
-    print(topResult);
+    var topResult = responseObj['probs'][0];
+    setState(() {
+      result = topResult;
+    });
   }
 }
