@@ -55,7 +55,7 @@ class _ImageProcessorState extends State<ImageProcessor> {
               padding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
               onPressed: _upload,
               child: Text(
-                "Diagnose",
+                "Perform Classification",
                 textAlign: TextAlign.center,
                 style: style.copyWith(
                     color: Colors.blue, fontWeight: FontWeight.bold),
@@ -68,8 +68,8 @@ class _ImageProcessorState extends State<ImageProcessor> {
   }
 
   _upload() async {
-    if(_imageFile == null) return null;
-    const String serverBaseUrl = 'http://10.0.0.198:5000';
+    if (_imageFile == null) return null;
+    const String serverBaseUrl = 'http://192.168.0.140:5000';
     final url = '$serverBaseUrl/upload';
     const Map<String, String> headers = {
       "Content-type": "application/json",
@@ -91,6 +91,4 @@ class _ImageProcessorState extends State<ImageProcessor> {
     var responseString = String.fromCharCodes(responseData);
     print(responseString);
   }
-
-
 }
