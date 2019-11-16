@@ -1,72 +1,74 @@
-
 import 'package:flutter/material.dart';
+import 'components/skin_detect_app_bar.dart';
+import 'components/home_carousel.dart';
 
 class HomePage extends StatelessWidget {
-
   final String title;
 
   HomePage({this.title}) : super();
 
   @override
   Widget build(BuildContext context) {
+    final signinButton = Row(
+      children: <Widget>[
+        Expanded(
+          child: FlatButton(
+            color: Theme.of(context).primaryColor,
+            padding: EdgeInsets.all(16),
+            textColor: Colors.white,
+            child: Text("I already have an account."),
+            onPressed: () => Navigator.pushNamed(context, '/login'),
+          ),
+        )
+      ],
+    );
+
+    final signupButton = Row(
+      children: <Widget>[
+        Expanded(
+          child: FlatButton(
+            color: Color.fromARGB(255, 240, 240, 242),
+            padding: EdgeInsets.all(16),
+            child: Text("I'm a new Skin Detect user."),
+            onPressed: () => Navigator.pushNamed(context, '/register'),
+          ),
+        )
+      ],
+    );
+
     return Scaffold(
-      body: Center(
-        child: Column(
-            children: <Widget>[
-              mainContainer,
-              loginContainer(context),
-              registerContainer(context),
-              diagnoseContainer(context),
-            ]
-        ),
-      ),
-    );
-  }
-
-  var mainContainer = Container(
-    child: Padding(
-      padding: EdgeInsets.only(top: 25.0),
-      child: Text(
-        'Skin Detect',
-        textDirection: TextDirection.ltr,
-        style: TextStyle(
-          fontSize: 32,
-          color: Colors.black87,
-        ),
-      ),
-    ),
-  );
-
-  Container loginContainer(BuildContext context) {
-    return Container(
-      child: RaisedButton(
-        child: Text('Login'),
-        onPressed: () {
-          Navigator.pushNamed(context, '/login');
-        },
-      ),
-    );
-  }
-
-  Container registerContainer(BuildContext context) {
-    return Container(
-      child: RaisedButton(
-        child: Text('Register'),
-        onPressed: () {
-          Navigator.pushNamed(context, '/register');
-        },
-      ),
-    );
-  }
-
-  Container diagnoseContainer(BuildContext context) {
-    return Container(
-      child: RaisedButton(
-        child: Text('Diagnose'),
-        onPressed: () {
-          Navigator.pushNamed(context, '/diagnose');
-        },
-      ),
-    );
+        appBar: SkinDetectAppBar(),
+        body: LayoutBuilder(
+          builder: (context, constraint) {
+            return SingleChildScrollView(
+              child: ConstrainedBox(
+                constraints: BoxConstraints(minHeight: constraint.maxHeight),
+                child: IntrinsicHeight(
+                  child: Column(
+                    children: <Widget>[
+                      Expanded(
+                          child: CarouselWithIndicator(
+                              height: constraint.maxHeight - 180)),
+                      Container(
+                        color: Colors.white,
+                        child: Padding(
+                          padding: EdgeInsets.all(16),
+                          child: Column(
+                            children: <Widget>[
+                              signinButton,
+                              Padding(
+                                  padding: EdgeInsets.only(top: 16),
+                                  child: signupButton)
+                            ],
+                          ),
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+              ),
+            );
+          },
+        ));
   }
 }
