@@ -58,7 +58,8 @@ class _ImageProcessorState extends State<ImageProcessor> {
                 "Perform Classification",
                 textAlign: TextAlign.center,
                 style: style.copyWith(
-                    color: Colors.blue, fontWeight: FontWeight.bold),
+                    color: Theme.of(context).primaryColor,
+                    fontWeight: FontWeight.bold),
               ),
             ),
           ],
