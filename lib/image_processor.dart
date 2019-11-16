@@ -112,6 +112,8 @@ class _ImageProcessorState extends State<ImageProcessor> {
     //Get the response from the server
     var responseData = await response.stream.toBytes();
     var responseString = String.fromCharCodes(responseData);
-    print(responseString);
+    Map responseObj = json.decode(responseString);
+    var topResult = responseObj['probs'].first();
+    print(topResult);
   }
 }

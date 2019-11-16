@@ -7,7 +7,7 @@ import 'components/skin_detect_app_bar.dart';
 
 class DiagnosePage extends StatelessWidget {
   final TextStyle style = TextStyle(fontFamily: 'Montserrat', fontSize: 20.0);
-  final int creditsRemaining = 2;
+  final int creditsRemaining = 3;
 
   @override
   Widget build(BuildContext context) {
