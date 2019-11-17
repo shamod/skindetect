@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:skindetect/config.dart';
 
 class ImageProcessor extends StatefulWidget {
   final File _imageFile;
@@ -53,7 +54,7 @@ class _ImageProcessorState extends State<ImageProcessor> {
             MaterialButton(
               minWidth: MediaQuery.of(context).size.width,
               padding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
-              onPressed: _upload,
+              onPressed: () { _upload(context); },
               child: Text(
                 "Diagnose",
                 textAlign: TextAlign.center,
@@ -67,9 +68,9 @@ class _ImageProcessorState extends State<ImageProcessor> {
     );
   }
 
-  _upload() async {
+  _upload(BuildContext context) async {
     if(_imageFile == null) return null;
-    const String serverBaseUrl = 'http://10.0.0.198:5000';
+    String serverBaseUrl = AppConfig.of(context).apiBaseURL;
     final url = '$serverBaseUrl/upload';
     const Map<String, String> headers = {
       "Content-type": "application/json",

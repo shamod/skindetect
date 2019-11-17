@@ -1,6 +1,7 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:skindetect/config.dart';
 import 'package:skindetect/payment/pay.model.dart';
 import 'package:skindetect/payment/pay.service.dart';
 
@@ -216,9 +217,9 @@ class _PayPageState extends State<PayPage> {
                                           onPressed: () async {
                                             if(_formKey.currentState.validate()) {
                                               var card = _pay.toForm();
-                                              var token = await PayService.generateToken(card, 'pk_test_4f6xxU4M7IJpjubbYsfgaJqH');
+                                              var token = await PayService.generateToken(card, 'pk_test_4f6xxU4M7IJpjubbYsfgaJqH', AppConfig.of(context).stripeURL + '/tokens');
                                               if(token['id'] != null) {
-                                                var response = await PayService.postCharge(token['id']);
+                                                var response = await PayService.postCharge(token['id'], AppConfig.of(context).apiBaseURL + '/charge');
                                                 print(response);
                                               }
                                             }
