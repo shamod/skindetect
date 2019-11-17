@@ -7,7 +7,7 @@ import 'package:skindetect/authentication/register.dart';
 
 void main() {
   var configuredApp = new AppConfig(
-      apiBaseURL: 'http://10.0.0.198:5000',
+      apiBaseURL: 'https://skindetect-server.onrender.com',
       stripeURL: 'https://api.stripe.com/v1',
       child: MyApp(),
   );
