@@ -1,9 +1,9 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:skindetect/image_processor.dart';
+import 'package:skindetect/diagnosis/image_processor.dart';
 import 'package:skindetect/payment/pay.dart';
-import 'components/skin_detect_app_bar.dart';
+import '../components/skin_detect_app_bar.dart';
 
 class DiagnosePage extends StatelessWidget {
   final TextStyle style = TextStyle(fontFamily: 'Montserrat', fontSize: 20.0);

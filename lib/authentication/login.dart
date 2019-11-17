@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:skindetect/authentication/auth.service.dart';
 import 'package:skindetect/authentication/user.model.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:skindetect/config.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -152,7 +153,7 @@ class LoginPageFormState extends State<LoginPage> {
                                                 .validate()) {
                                               AuthenticationService
                                                       .endpointPost(
-                                                          'login', _user)
+                                                          AppConfig.of(context).apiBaseURL + '/login', _user)
                                                   .then((res) {
                                                 try {
                                                   Map resObj =

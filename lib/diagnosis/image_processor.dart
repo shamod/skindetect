@@ -3,7 +3,8 @@ import 'dart:io';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'components/skin_detect_app_bar.dart';
+import 'package:skindetect/config.dart';
+import '../components/skin_detect_app_bar.dart';
 
 class ImageProcessor extends StatefulWidget {
   final File _imageFile;
@@ -81,7 +82,7 @@ class _ImageProcessorState extends State<ImageProcessor> {
                               height: 64,
                               color: Theme.of(context).primaryColor,
                               minWidth: MediaQuery.of(context).size.width,
-                              onPressed: _upload,
+                              onPressed: () { _upload(context); },
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: <Widget>[
@@ -108,16 +109,29 @@ class _ImageProcessorState extends State<ImageProcessor> {
                   ),
                 )
               ],
-            )
+
+            ),
+            MaterialButton(
+              minWidth: MediaQuery.of(context).size.width,
+              padding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
+              onPressed: () { _upload(context); },
+              child: Text(
+                "Diagnose",
+                textAlign: TextAlign.center,
+                style: style.copyWith(
+                    color: Colors.blue, fontWeight: FontWeight.bold),
+              ),
+            ),
           ],
         ],
       ),
     );
   }
 
-  _upload() async {
-    if (_imageFile == null) return null;
-    const String serverBaseUrl = 'http://192.168.0.140:5000';
+  _upload(BuildContext context) async {
+    if(_imageFile == null) return null;
+    String serverBaseUrl = AppConfig.of(context).apiBaseURL;
+
     final url = '$serverBaseUrl/upload';
     const Map<String, String> headers = {
       "Content-type": "application/json",
