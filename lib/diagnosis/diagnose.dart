@@ -54,16 +54,15 @@ class DiagnosePage extends StatelessWidget {
                     ),
                   ],
                 ),
-                creditsRemaining == 0
-                    ? _buyCreditButton(context)
-                    : Padding(
-                        padding: EdgeInsets.only(top: 32, left: 16, right: 16),
-                        child: Text(
-                          "Tap the camera button, then upload an image to receive your results.",
-                          textAlign: TextAlign.center,
-                          style: TextStyle(fontSize: 18),
-                        ),
-                      ),
+                 _buyCreditButton(context),
+                 Padding(
+                    padding: EdgeInsets.only(top: 32, left: 16, right: 16),
+                    child: Text(
+                      "Tap the camera button, then upload an image to receive your results.",
+                      textAlign: TextAlign.center,
+                      style: TextStyle(fontSize: 18),
+                    ),
+                  ),
               ],
             ),
           ),
@@ -93,7 +92,7 @@ class DiagnosePage extends StatelessWidget {
             Navigator.push(
                 context, MaterialPageRoute(builder: (context) => PayPage()));
           },
-          child: Text("Purchase 1 credit",
+          child: Text("Purchase Credit",
               textAlign: TextAlign.center,
               style: style.copyWith(
                   color: Colors.white, fontWeight: FontWeight.bold)),
