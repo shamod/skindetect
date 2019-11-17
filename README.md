@@ -20,7 +20,7 @@ This model uses a Flask server to provide user authentication and perform the im
 https://github.com/shamod/skindetect-server
 
 ### Please refer to the above code and run the server.
-### Once the server is running, change apiBaseURL: 'http://10.0.0.198:5000'
+### Once the server is running, change apiBaseURL
 ### parameter in main.dart file to your local IP address.
 
 
