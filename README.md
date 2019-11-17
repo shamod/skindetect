@@ -19,10 +19,6 @@ Supported classifications:
 This model uses a Flask server to provide user authentication and perform the image classification.
 https://github.com/shamod/skindetect-server
 
-### Please refer to the above code and run the server.
-### Once the server is running, change apiBaseURL
-### parameter in main.dart file to your local IP address.
-
 
 ## Install dependencies:
 
