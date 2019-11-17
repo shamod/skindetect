@@ -37,7 +37,9 @@ flutter run
 
 ## Methods
 
-Our model uses the HAM10000 dataset from harvard University, it includes a large collection of multi-source dermatoscopic images of pigmented lesions for classifications. Our model framework is built on PyTorch using the Fast.Ai library. We use transfer learning with the ResNet50 architecture base before adding the HAM 10,000 images on top.
+Our model uses the [HAM10000 dataset](https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/DBW86T) from Harvard University. Cases include a representative collection of all important diagnostic categories in the realm of pigmented lesions: Actinic keratoses and intraepithelial carcinoma / Bowen's disease (akiec), basal cell carcinoma (bcc), benign keratosis-like lesions (solar lentigines / seborrheic keratoses and lichen-planus like keratoses, bkl), dermatofibroma (df), melanoma (mel), melanocytic nevi (nv) and vascular lesions (angiomas, angiokeratomas, pyogenic granulomas and hemorrhage, vasc).
+
+Our model framework is built on PyTorch using the Fast.Ai library. We use transfer learning with the ResNet50 architecture base before adding the HAM 10,000 images on top.
 
 ## Credits
 
