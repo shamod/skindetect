@@ -7,7 +7,7 @@ import '../components/skin_detect_app_bar.dart';
 
 class DiagnosePage extends StatelessWidget {
   final TextStyle style = TextStyle(fontFamily: 'Montserrat', fontSize: 20.0);
-  final int creditsRemaining = 2;
+  final int creditsRemaining = 3;
 
   @override
   Widget build(BuildContext context) {
@@ -54,7 +54,16 @@ class DiagnosePage extends StatelessWidget {
                     ),
                   ],
                 ),
-                creditsRemaining == 0 ? _buyCreditButton(context) : Container(),
+                creditsRemaining == 0
+                    ? _buyCreditButton(context)
+                    : Padding(
+                        padding: EdgeInsets.only(top: 32, left: 16, right: 16),
+                        child: Text(
+                          "Tap the camera button, then upload an image to receive your results.",
+                          textAlign: TextAlign.center,
+                          style: TextStyle(fontSize: 18),
+                        ),
+                      ),
               ],
             ),
           ),
